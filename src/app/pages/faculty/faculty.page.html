@@ -1,0 +1,22 @@
+<ion-content fullscreen>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Faculty</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list *ngFor="let notice of allNotices">
+    <ion-item routerLink="/home/{{notice.id}}">
+      <ion-label>
+        <h2>{{notice.title}}</h2>
+        <p>{{notice.description}}</p>
+      </ion-label>
+      <ion-note slot="end" color="primary">
+        <p>{{notice.date |date:'longDate'}}</p>
+        <p>{{notice.faculty}}</p>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

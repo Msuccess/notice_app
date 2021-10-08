@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Notice</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="navigateBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #noticeForm="ngForm" novalidate class="mx-5">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked" color="primary">Title</ion-label>
+        <ion-input [(ngModel)]="notice.title" name="title" type="text" #title="ngModel" spellcheck="false"
+          autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="title.valid || submitted === false" class="ion-padding-start">
+          Title is required
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Faculty</ion-label>
+        <ion-select [(ngModel)]="notice.faculty" name="faculty" type="text" #faculty="ngModel" required>
+          <ng-container *ngFor="let item of faculties">
+            <ion-select-option [value]="item.name">{{item.name}}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="faculty.valid || submitted === false" class="ion-padding-start">
+          Faculty is required
+        </p>
+      </ion-text>
+
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Description</ion-label>
+        <ion-textarea rows="6" cols="15" [(ngModel)]="notice.description" name="description" type="description"
+          #description="ngModel" required></ion-textarea>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="description.valid || submitted === false" class="ion-padding-start">
+          Description is required
+        </p>
+      </ion-text>
+
+
+    </ion-list>
+
+    <ion-row>
+      <ion-col class="d-flex justify-content-center">
+        <ion-spinner *ngIf="submitted && noticeForm.valid"></ion-spinner>
+        <ion-button (click)="onSubmit(noticeForm)" color="primary" expand="block" *ngIf="!submitted">
+          Create Notice
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>

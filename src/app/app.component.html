@@ -1,0 +1,39 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+
+        <ion-list id="inbox-list">
+          <ion-avatar class="mb-2">
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          </ion-avatar>
+          <ion-list-header>Kassim A</ion-list-header>
+          <ion-note>Computer Science</ion-note>
+          <ion-item routerDirection="root" lines="none" routerLink="/home" detail="false" routerLinkActive="selected">
+            <ion-icon slot="start" name="school-outline"></ion-icon>
+            <ion-label>Notice Board</ion-label>
+          </ion-item>
+        </ion-list>
+
+        <ion-list id="labels-list">
+          <ion-list-header>Category</ion-list-header>
+          <ion-menu-toggle auto-hide="false" *ngFor="let l of labels">
+            <ion-item routerDirection="root" [routerLink]="[l.url]" lines="none" detail="false"
+              routerLinkActive="selected">
+              <ion-icon slot="start" [name]="l.icon"></ion-icon>
+              <ion-label>{{ l.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+
+      </ion-content>
+    </ion-menu>
+
+    <ion-router-outlet id="main-content"> </ion-router-outlet>
+  </ion-split-pane>
+
+  <ng-container *ngIf="loader |async">
+    <ion-progress-bar type="indeterminate" reversed="true"></ion-progress-bar>
+  </ng-container>
+
+</ion-app>

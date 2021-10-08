@@ -1,0 +1,7 @@
+{
+  "name": "noticeboard_app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="navigateBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="text-turncate"> {{notice?.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-note>{{notice?.title}}</ion-note>
+  <div class="pt-4 px-5">
+    <p> {{notice?.description}}</p>
+    <p class="text-primary"> {{notice?.date |date:'longDate'}}</p>
+  </div>
+</ion-content>

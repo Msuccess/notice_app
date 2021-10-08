@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form #registerForm="ngForm" novalidate class="mx-5 mt-4">
+    <ion-list>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Full name</ion-label>
+        <ion-input [(ngModel)]="register.fullname" name="fullname" type="text" #fullname="ngModel" spellcheck="false"
+          autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="fullname.valid || submitted === false" class="ion-padding-start">
+          Full name is required
+        </p>
+      </ion-text>
+
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Faculty</ion-label>
+        <ion-select [(ngModel)]="register.faculty" name="faculty" type="text" #faculty="ngModel" required>
+          <ng-container *ngFor="let item of faculties">
+            <ion-select-option [value]="item.id">{{item.name}}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="faculty.valid || submitted === false" class="ion-padding-start">
+          Faculty is required
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Email</ion-label>
+        <ion-input [(ngModel)]="register.email" name="email" type="text" #email="ngModel" spellcheck="false"
+          autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="email.valid || submitted === false" class="ion-padding-start">
+          Email is required
+        </p>
+      </ion-text>
+
+    </ion-list>
+
+    <ion-row>
+      <ion-col>
+        <ion-spinner *ngIf="submitted"></ion-spinner>
+        <ion-button color="primary" (click)="onSubmit(registerForm)" expand="block" *ngIf="!submitted">
+          Update Profile
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>
