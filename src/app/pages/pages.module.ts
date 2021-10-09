@@ -12,7 +12,13 @@ import { IonicModule } from '@ionic/angular';
 import { AddNoticePage } from './home/add-notice/add-notice.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsNoticePage } from './home/details-notice/details-notice.page';
+import { FileSizePipe } from '../core/file-size.pipe';
 
+
+
+
+
+export class HomePageModule {}
 @NgModule({
   declarations: [
     PagesComponent,
@@ -23,6 +29,7 @@ import { DetailsNoticePage } from './home/details-notice/details-notice.page';
     HomePage,
     AddNoticePage,
     DetailsNoticePage,
+    FileSizePipe,
   ],
   imports: [
     CommonModule,
