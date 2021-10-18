@@ -63,7 +63,7 @@ export class HomePage implements OnInit {
   }
 
   updateNotice(ev: any) {
-    console.log();
+    console.log(ev);
     if (ev.detail.value === 'all') {
       this.noticeService.get().subscribe((data: any) => {
         this.allNotices = data;

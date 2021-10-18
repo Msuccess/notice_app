@@ -8,4 +8,5 @@ export interface NoticeModel {
   user: any;
   isFavorite: boolean;
   hide: boolean;
+  file: any;
 }
