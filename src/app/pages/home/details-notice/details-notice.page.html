@@ -17,5 +17,8 @@
     </ion-note>
     <p> {{notice?.description}}</p>
     <p class="text-primary"> {{notice?.date |date:'longDate'}}</p>
+    <p class="font-size-10">{{notice?.faculty}}</p>
+    <a [href]="fileLink" rel="nofollow" target="_blank" *ngIf="fileLink">Download</a>
+    {{notice?.fileName}}
   </div>
 </ion-content>

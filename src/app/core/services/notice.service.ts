@@ -20,12 +20,14 @@ export class NoticeService {
     return this.firestore.collection(this.collectionName).valueChanges();
   }
 
-  put(id: string, data: any) {
-    return this.firestore.doc(`${this.collectionName}/` + id).update(data);
-    // return this.firestore.collection(this.collectionName).doc(id).update(data);
+  async put(id: string, data: any) {
+    await this.delete(id)
+      .then(() => {})
+      .catch((err: any) => console.log('>>>>>>>>>>>>>>>>>>>', err));
+    return this.post(data).then(() => {});
   }
 
   delete(id: string) {
-    this.firestore.collection(this.collectionName).doc(id).delete();
+    return this.firestore.collection(this.collectionName).doc(id).delete();
   }
 }

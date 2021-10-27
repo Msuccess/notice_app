@@ -11,7 +11,7 @@
         Favorites
       </ion-segment-button>
     </ion-segment>
-    <ion-title *ngIf="!ios && !showSearchbar">Schedule</ion-title>
+    <ion-title *ngIf="!ios && !showSearchbar">Notices</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,15 +25,13 @@
   <ion-list *ngFor="let notice of allNotices">
     <ion-item-sliding id="item100" #slidingItem>
       <ion-item routerLink="/home/{{notice.id}}">
-        <ion-avatar slot="start" *ngIf="!(notice.file)">
-          <img src="./../../../assets/icon/default.png">
-        </ion-avatar>
         <ion-label>
           <h2>{{notice.title}}</h2>
           <p>{{notice.description}}</p>
         </ion-label>
         <ion-note slot="end" color="primary">
           <p class="font-size-10"> {{notice.date |date:'shortDate'}}</p>
+          <p class="font-size-10">{{notice.faculty}}</p>
         </ion-note>
       </ion-item>
 

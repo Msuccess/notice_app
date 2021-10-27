@@ -12,6 +12,7 @@ import { UtilService } from 'src/app/core/services/util.service';
 export class DetailsNoticePage implements OnInit {
   public notice: NoticeModel;
   id: any;
+  fileLink: any;
 
   constructor(
     private noticeService: NoticeService,
@@ -36,6 +37,7 @@ export class DetailsNoticePage implements OnInit {
       (res: NoticeModel[]) => {
         console.log(res);
         this.notice = res.find((e) => e.id === this.id);
+        this.fileLink = this.notice.file?.split('?')[0];
         this.util.showLoader$.next(false);
       },
       (error: any) => this.util.showLoader$.next(false)

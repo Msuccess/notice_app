@@ -5,6 +5,7 @@ export interface NoticeModel {
   description: string;
   faculty: string;
   title: string;
+  fileName: string;
   user: any;
   isFavorite: boolean;
   hide: boolean;
