@@ -86,11 +86,8 @@ export class AddNoticePage implements OnInit {
       return;
     }
 
-    this.notice.date = new Date(Date.now()).toISOString();
-
     this.notice.file = this.fileUrl;
     this.notice.fileName = this.fileName;
-    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.notice);
     this.noticeService
       .post(this.notice)
       .then((resp) => {

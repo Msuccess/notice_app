@@ -93,6 +93,15 @@ export class UtilService {
     }
   }
 
+  public getUserRole(): Observable<any> {
+    const user: any = localStorage.getItem('userData');
+    try {
+      return of(JSON.parse(user.split(',')));
+    } catch (e) {
+      return of([]);
+    }
+  }
+
   public setUser(key: string, user: any): any {
     if (user != null) {
       localStorage.setItem(key, JSON.stringify(user));

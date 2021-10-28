@@ -7,16 +7,32 @@
       <ion-title>Faculty</ion-title>
     </ion-toolbar>
   </ion-header>
+
   <ion-list *ngFor="let notice of allNotices">
-    <ion-item routerLink="/home/{{notice.id}}">
-      <ion-label>
-        <h2>{{notice.title}}</h2>
-        <p>{{notice.description}}</p>
-      </ion-label>
-      <ion-note slot="end" color="primary">
-        <p>{{notice.date |date:'longDate'}}</p>
-        <p>{{notice.faculty}}</p>
-      </ion-note>
-    </ion-item>
+    <ion-item-sliding id="item100" #slidingItem>
+
+      <ion-item routerLink="/app/notice/{{notice.id}}">
+        <ion-label>
+          <h2>{{notice?.title}}</h2>
+          <p>{{notice?.description}}</p>
+        </ion-label>
+        <ion-note slot="end" color="primary">
+          <p class="font-size-10"> {{notice?.date |date:'shortDate'}}</p>
+          <p class="font-size-10">{{notice?.faculty}}</p>
+        </ion-note>
+      </ion-item>
+
+      <ion-item-options>
+        <ion-item-option color="primary" (click)="addFavorite(notice)">
+          Favorite
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
   </ion-list>
+  <ion-list-header [hidden]="allNotices?.length !== 0">
+    <ion-col class="d-flex justify-content-center align-items-center">
+      <div> No Notice Found</div>
+    </ion-col>
+  </ion-list-header>
 </ion-content>

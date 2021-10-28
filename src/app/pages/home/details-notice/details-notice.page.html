@@ -18,7 +18,12 @@
     <p> {{notice?.description}}</p>
     <p class="text-primary"> {{notice?.date |date:'longDate'}}</p>
     <p class="font-size-10">{{notice?.faculty}}</p>
-    <a [href]="fileLink" rel="nofollow" target="_blank" *ngIf="fileLink">Download</a>
-    {{notice?.fileName}}
+    <p>
+      <a [href]="notice?.file" rel="nofollow" target="_blank">
+        {{notice?.fileName}} &nbsp;<ion-icon name="download-outline"></ion-icon>
+      </a>
+    </p>
+
+
   </div>
 </ion-content>

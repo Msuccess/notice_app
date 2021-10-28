@@ -30,19 +30,18 @@ const routes: Routes = [
         component: StudentPage,
       },
       {
-        path: 'home',
+        path: 'notices',
         component: HomePage,
       },
       {
-        path: 'home/:id',
+        path: 'notice/:id',
         component: DetailsNoticePage,
       },
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'notices',
         pathMatch: 'full',
       },
-      { path: '***', redirectTo: 'home', pathMatch: 'full' },
     ],
   },
 ];

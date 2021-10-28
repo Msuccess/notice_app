@@ -9,14 +9,10 @@
           </ion-avatar>
           <ion-list-header>Kassim A</ion-list-header>
           <ion-note>Computer Science</ion-note>
-          <ion-item routerDirection="root" lines="none" routerLink="/home" detail="false" routerLinkActive="selected">
-            <ion-icon slot="start" name="school-outline"></ion-icon>
-            <ion-label>Notice Board</ion-label>
-          </ion-item>
         </ion-list>
 
         <ion-list id="labels-list">
-          <ion-list-header>Category</ion-list-header>
+
           <ion-menu-toggle auto-hide="false" *ngFor="let l of labels">
             <ion-item routerDirection="root" [routerLink]="[l.url]" lines="none" detail="false"
               routerLinkActive="selected">
@@ -24,6 +20,15 @@
               <ion-label>{{ l.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+
+        </ion-list>
+
+        <ion-list id="inbox-list">
+          <ion-item routerDirection="root" lines="none" routerLink="/auth" detail="false" routerLinkActive="selected"
+            (click)="logoOut()">
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            <ion-label>Log out</ion-label>
+          </ion-item>
         </ion-list>
 
       </ion-content>

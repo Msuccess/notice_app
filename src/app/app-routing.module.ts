@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/auth.guard';
-import { AboutPage } from './pages/about/about.page';
-
-import { ProfilePage } from './pages/profile/profile.page';
-import { StudentPage } from './student/student.page';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'pages',
+    redirectTo: 'app',
     pathMatch: 'full',
   },
   {
@@ -17,8 +13,8 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
+    path: 'app',
     canActivate: [AuthGuard],
-    path: 'pages',
     loadChildren: () =>
       import('./pages/pages.module').then((m) => m.PagesModule),
   },

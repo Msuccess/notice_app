@@ -25,8 +25,12 @@ export class LoginPage implements OnInit {
     if (form.valid) {
       this.authService
         .login(this.login.email, this.login.password)
-        .then(() => {
-          this.router.navigate(['home']);
+        .then((res: any) => {
+          console.log('>>>>>>>>>>>>>>>>>>,res', res);
+          this.getUser(res.user.uid);
+          this.util.setUser('user', res.user);
+          this.util.setUser('token', res.user.refreshToken);
+
           this.submitted = false;
         })
         .catch(() => {
@@ -35,11 +39,20 @@ export class LoginPage implements OnInit {
             'Error Logging In Check credentials and try again',
             'Error'
           );
-        });
+        })
+        .finally(() => (this.submitted = false));
     }
   }
 
   ngOnInit(): void {}
+
+  getUser(id: string) {
+    this.authService.getUser().subscribe((res: any) => {
+      const r = res.find((user: any) => user.id === id);
+      this.util.setUser('userData', r);
+      this.router.navigate(['app/notices']);
+    });
+  }
 
   onSignup() {
     this.router.navigateByUrl('/auth/register');

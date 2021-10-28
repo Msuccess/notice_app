@@ -19,7 +19,6 @@ export class AuthService {
   }
 
   public registerUser(data: any) {
-    data.id = Date.now().toString();
     return this.firestore.collection(this.collectionName).add(data);
   }
 

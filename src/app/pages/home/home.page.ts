@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   AngularFirestore,
@@ -49,6 +50,7 @@ export class HomePage implements OnInit {
 
   isImgUploading: boolean;
   isImgUploaded: boolean;
+  role: string;
 
   constructor(
     private noticeService: NoticeService,
@@ -59,7 +61,11 @@ export class HomePage implements OnInit {
     public toastCtrl: ToastController,
     public config: Config,
     private util: UtilService
-  ) {}
+  ) {
+    this.util.getUserRole().subscribe((res: any) => {
+      this.role = res.role;
+    });
+  }
 
   ngOnInit() {
     this.getAllNotice();
@@ -68,10 +74,57 @@ export class HomePage implements OnInit {
 
   getAllNotice(): any {
     this.util.showLoader$.next(true);
+
     this.noticeService.get().subscribe(
       (data: any) => {
-        console.log(data);
-        this.allNotices = data;
+        if (data) {
+          // eslint-disable-next-line arrow-body-style
+          this.allNotices = data.map((e: any) => {
+            return {
+              id: e.payload.doc.id,
+              date: e.payload.doc.data()['date'],
+              description: e.payload.doc.data()['description'],
+              faculty: e.payload.doc.data()['faculty'],
+              title: e.payload.doc.data()['title'],
+              fileName: e.payload.doc.data()['fileName'],
+              user: e.payload.doc.data()['user'],
+              isFavorite: e.payload.doc.data()['isFavorite'],
+              hide: e.payload.doc.data()['hide'],
+              file: e.payload.doc.data()['file'],
+            };
+          });
+        }
+        this.util.showLoader$.next(false);
+      },
+      (err: any) => {
+        this.util.showLoader$.next(false);
+      }
+    );
+  }
+
+  getFavAllNotice(): any {
+    this.util.showLoader$.next(true);
+
+    this.noticeService.get().subscribe(
+      (data: any) => {
+        if (data) {
+          // eslint-disable-next-line arrow-body-style
+          this.allNotices = data.map((e: any) => {
+            return {
+              id: e.payload.doc.id,
+              date: e.payload.doc.data()['date'],
+              description: e.payload.doc.data()['description'],
+              faculty: e.payload.doc.data()['faculty'],
+              title: e.payload.doc.data()['title'],
+              fileName: e.payload.doc.data()['fileName'],
+              user: e.payload.doc.data()['user'],
+              isFavorite: e.payload.doc.data()['isFavorite'],
+              hide: e.payload.doc.data()['hide'],
+              file: e.payload.doc.data()['file'],
+            };
+          });
+        }
+        this.allNotices = this.allNotices.filter((r: any) => r.isFavorite);
         this.util.showLoader$.next(false);
       },
       (err: any) => {
@@ -81,25 +134,16 @@ export class HomePage implements OnInit {
   }
 
   updateNotice(ev: any) {
-    console.log('>>>>>>>>>>>>>>>>>>>', ev.detail.value);
     if (ev.detail.value === 'all') {
-      this.noticeService.get().subscribe((data: any) => {
-        this.allNotices = data;
-      });
+      this.getAllNotice();
     } else {
-      this.noticeService.get().subscribe((data: NoticeModel[]) => {
-        this.allNotices = data.filter((e) => e.isFavorite);
-      });
+      this.getFavAllNotice();
     }
   }
 
   addFavorite(data: NoticeModel) {
-    console.log(data, '>>>>>>>>>>>>>>>>');
-    const r = {} as NoticeModel;
-    r.isFavorite = true;
-
     this.noticeService
-      .put(data.id, r)
+      .put(data.id, data)
       .then(() => {
         this.getAllNotice();
       })
@@ -111,17 +155,33 @@ export class HomePage implements OnInit {
       });
   }
 
-  async removeFavorite(slidingItem: IonItemSliding, id: string) {
-    console.log(id);
-    this.util
-      .deleteConfirmation(
-        'Remove Favorite',
-        'Are you sure to delete notice',
-        slidingItem,
-        () => this.noticeService.delete(id)
-      )
+  deleteNotice(slidingItem: IonItemSliding, data: any) {
+    this.util.deleteConfirmation(
+      'Delete',
+      'Are you sure to delete notice',
+      slidingItem,
+      () =>
+        this.noticeService
+          .delete(data.id)
+          .then(() => {
+            this.getAllNotice();
+            this.util.presentToast('Notice deleted successfully');
+          })
+          .catch((e: any) => this.util.presentErrorMessage(e.message, 'Error'))
+    );
+  }
+
+  removeFavorite(slidingItem: IonItemSliding, data: any) {
+    this.noticeService
+      .putRemove(data.id, data)
       .then(() => {
         this.getAllNotice();
+      })
+      .catch(() => {
+        this.util.presentErrorMessage(
+          'Error removing notice form favorite',
+          'Error'
+        );
       });
   }
 }

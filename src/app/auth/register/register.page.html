@@ -24,7 +24,7 @@
         <ion-label position="stacked" color="primary">Faculty</ion-label>
         <ion-select [(ngModel)]="register.faculty" name="faculty" type="text" #faculty="ngModel" required>
           <ng-container *ngFor="let item of faculties">
-            <ion-select-option [value]="item.id">{{item.name}}</ion-select-option>
+            <ion-select-option [value]="item.name">{{item.name}}</ion-select-option>
           </ng-container>
         </ion-select>
       </ion-item>

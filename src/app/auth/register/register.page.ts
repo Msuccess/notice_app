@@ -31,15 +31,21 @@ export class RegisterPage implements OnInit {
         this.authService
           .signup(this.register.email, this.register.password)
           .then((res: any) => {
-            console.log(res);
-            this.authService.registerUser(this.register);
-            this.util.setUser('user', res.user);
-            this.util.setUser('userData', this.register);
+            console.log('>>>>>>>>>>>>>', res);
+            const register = {} as UserModel;
+            register.id = res.user.uid;
+            register.email = res.user.email;
+            register.faculty = this.register.faculty;
+            register.fullname = this.register.fullname;
+            register.role = 'student';
+
+            this.authService.registerUser(register);
             this.submitted = false;
             this.router.navigateByUrl('/auth/login');
           })
-          .catch(() => {
-            this.util.presentErrorMessage('User Already Exist', 'Error');
+          .catch((error: any) => {
+            this.submitted = false;
+            this.util.presentErrorMessage(error.message, 'Error');
           });
       }
     }

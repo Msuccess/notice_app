@@ -7,16 +7,22 @@ import { UtilService } from './core/services/util.service';
 })
 export class AppComponent {
   public labels = [
-    { title: 'Faculty', url: '/faculty', icon: 'home-outline' },
-    { title: 'Profile', url: '/profile', icon: 'person-outline' },
+    { title: 'Notice Board', url: '/app/notices', icon: 'school-outline' },
+
+    { title: 'Faculty', url: '/app/faculty', icon: 'home-outline' },
+    { title: 'Profile', url: '/app/profile', icon: 'person-outline' },
     {
       title: 'About',
-      url: '/about',
+      url: '/app/about',
       icon: 'information-circle-outline',
     },
   ];
   loader: any;
   constructor(private util: UtilService) {
     this.loader = this.util.showLoader$;
+  }
+
+  logoOut() {
+    this.util.clear();
   }
 }
