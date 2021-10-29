@@ -22,6 +22,10 @@ export class AppComponent {
     this.loader = this.util.showLoader$;
   }
 
+  feedback() {
+    window.open('https://www.google.com/forms/about/', '_blank');
+  }
+
   logoOut() {
     this.util.clear();
   }

@@ -24,6 +24,10 @@
         </ion-list>
 
         <ion-list id="inbox-list">
+          <ion-item routerDirection="root" lines="none" routerLink="/" detail="false" (click)="feedback()">
+            <ion-icon slot="start" name="chatbubble-ellipses-outline"></ion-icon>
+            <ion-label>Feedback</ion-label>
+          </ion-item>
           <ion-item routerDirection="root" lines="none" routerLink="/auth" detail="false" routerLinkActive="selected"
             (click)="logoOut()">
             <ion-icon slot="start" name="log-out-outline"></ion-icon>
