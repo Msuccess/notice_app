@@ -24,12 +24,12 @@ export class NoticeService {
     notice.description = data.description;
     notice.faculty = data.faculty;
     notice.isFavorite = false;
-    notice.file = data.file;
+    notice.file = data.file ? data.file : '';
     notice.fileName = data.fileName;
     notice.user = this.email;
     notice.hide = false;
     notice.title = data.title;
-
+    console.log('', notice);
     return this.firestore.collection(this.collectionName).add(notice);
   }
 
@@ -61,7 +61,7 @@ export class NoticeService {
     notice.isFavorite = false;
     notice.file = data.file;
     notice.fileName = data.fileName;
-    notice.user = data.email;
+    notice.user = data.user;
     notice.hide = false;
     notice.title = data.title;
     return this.firestore.doc(this.collectionName + '/' + id).update(notice);

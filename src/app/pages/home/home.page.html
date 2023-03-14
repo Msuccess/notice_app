@@ -41,10 +41,10 @@
       </ion-item>
 
       <ion-item-options>
-        <ion-item-option color="primary" (click)="addFavorite(notice)" *ngIf="segment === 'all'">
+        <ion-item-option color="primary" (click)="addFavorite(notice)" *ngIf="!notice?.isFavorite">
           Favorite
         </ion-item-option>
-        <ion-item-option color="danger" (click)="removeFavorite(slidingItem, notice)" *ngIf="segment === 'favorites'">
+        <ion-item-option color="danger" (click)="removeFavorite(slidingItem, notice)" *ngIf="notice?.isFavorite">
           UnFavorite
         </ion-item-option>
       </ion-item-options>

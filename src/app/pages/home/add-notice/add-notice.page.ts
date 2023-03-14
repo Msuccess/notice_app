@@ -124,7 +124,6 @@ export class AddNoticePage implements OnInit {
       fileStoragePath,
       file
     );
-
     this.progressNum = this.ngFireUploadTask.percentageChanges();
     this.progressSnapshot = this.ngFireUploadTask.snapshotChanges().pipe(
       finalize(() => {
