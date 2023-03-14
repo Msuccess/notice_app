@@ -61,7 +61,7 @@ export class NoticeService {
     notice.isFavorite = false;
     notice.file = data.file;
     notice.fileName = data.fileName;
-    notice.user = data.user;
+    notice.user = this.email;
     notice.hide = false;
     notice.title = data.title;
     return this.firestore.doc(this.collectionName + '/' + id).update(notice);
@@ -76,7 +76,7 @@ export class NoticeService {
     notice.isFavorite = data.isFavorite;
     notice.file = data.file;
     notice.fileName = data.fileName;
-    notice.user = data.email;
+    notice.user = this.email;
     notice.hide = true;
     notice.title = data.title;
     return this.firestore.doc(this.collectionName + '/' + id).update(notice);
@@ -91,7 +91,7 @@ export class NoticeService {
     notice.isFavorite = data.isFavorite;
     notice.file = data.file;
     notice.fileName = data.fileName;
-    notice.user = data.email;
+    notice.user = this.email;
     notice.hide = false;
     notice.title = data.title;
     return this.firestore.doc(this.collectionName + '/' + id).update(notice);
